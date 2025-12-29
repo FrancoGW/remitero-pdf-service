@@ -375,6 +375,10 @@ async def generate_pdf(remito: Remito):
     
     return Response(content=buffer.getvalue(), media_type="application/pdf")
 
+@app.get("/")
+async def root():
+    return {"status": "ok", "service": "pdf-generator", "message": "PDF Service is running"}
+
 @app.get("/health")
 async def health():
     return {"status": "ok", "service": "pdf-generator"}
