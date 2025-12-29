@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import Response
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 from reportlab.lib.pagesizes import A4
@@ -12,6 +13,15 @@ import io
 import os
 
 app = FastAPI()
+
+# Configurar CORS para permitir requests desde cualquier origen
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class RemitoItem(BaseModel):
     id: Optional[str] = None
